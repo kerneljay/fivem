@@ -952,7 +952,7 @@ void DrawWinConsole(bool* pOpen)
 {
 	EnsureConsoles();
 
-	g_consoles[2]->Draw("WinConsole", pOpen);
+	g_consoles[2]->Draw("Developer Console", pOpen);
 }
 
 #ifndef IS_FXSERVER
