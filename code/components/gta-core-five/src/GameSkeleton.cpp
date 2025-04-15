@@ -143,13 +143,14 @@ namespace rage
 					OnInitFunctionEndOrder(type, entry->order);
 				}
 			}
-		}
+		}	
 
 		OnInitFunctionEnd(type);
 
 		ValidateHeaps();
 
-		trace(__FUNCTION__ ": Done running %s init functions!\n", InitFunctionTypeToString(type));
+		//trace(__FUNCTION__ ": Done running %s init functions!\n", InitFunctionTypeToString(type));
+		trace("Init functions setup\n");
 	}
 
 	static void RunEntries(gameSkeleton_updateBase* update)

@@ -6,9 +6,12 @@ set path=C:\msys64\usr\bin;%path%
 set LUA_PATH=
 set LUA_CPATH=
 
+echo Checking for pacman...
 where /q pacman
 
 if errorlevel 1 (
+    echo pacman not found!
+    pause
     exit /B 1
 )
 

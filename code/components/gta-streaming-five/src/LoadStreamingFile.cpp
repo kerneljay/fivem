@@ -780,7 +780,7 @@ static void LoadDefDats(void* dataFileMgr, const char* name, bool enabled)
 	g_dataFileMgr = dataFileMgr;
 
 	// load before-level metas
-	trace("Loading content XML: %s\n", name);
+	trace("Loading XML: %s\n", name);
 
 	// load the level
 	dataFileMgr__loadDefDat(dataFileMgr, name, enabled);
@@ -810,7 +810,7 @@ static void LoadDefDats(void* dataFileMgr, const char* name, bool enabled, void*
 	g_dataFileMgr = dataFileMgr;
 
 	// load before-level metas
-	trace("Loading content XML: %s\n", name);
+	trace("Loading XML: %s\n", name);
 
 	// load the level
 	dataFileMgr__loadDefDat(dataFileMgr, name, enabled, unk);
