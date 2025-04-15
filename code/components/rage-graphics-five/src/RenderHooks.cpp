@@ -777,13 +777,13 @@ void(*g_origCreateBackbuffer)(void*);
 
 void WrapCreateBackbuffer(void* tf)
 {
-	trace("Creating backbuffer.\n");
+	trace("Creating backbuffer\n");
 
 	g_lastBackbufTexture = NULL;
 
 	g_origCreateBackbuffer(tf);
 
-	trace("Done creating backbuffer.\n");
+	trace("Created backbuffer\n");
 }
 
 bool WrapVideoModeChange(VideoModeInfo* info)
@@ -1757,7 +1757,7 @@ static HWND WINAPI HookCreateWindowExW(_In_ DWORD dwExStyle, _In_opt_ LPCWSTR lp
 	static HostSharedData<CfxState> initState("CfxInitState");
 	HWND w;
 
-	const auto wndName = L"FiveM® by Cfx.re";
+	const auto wndName = L"JayM®"; // I don't like this but leave it for now, I would rather define it in a header file
 
 	if (initState->isReverseGame)
 	{

@@ -295,7 +295,7 @@ void ComponentLoader::DoGameLoad(void* hModule)
 	{
 		auto& instances = component->GetInstances();
 
-		trace("pre-gameload component %s\n", component->GetName());
+		trace("(Pre-Gameload) component %s\n", component->GetName());
 
 		if (!instances.empty())
 		{

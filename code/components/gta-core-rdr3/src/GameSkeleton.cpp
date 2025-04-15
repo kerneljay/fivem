@@ -92,7 +92,7 @@ namespace rage
 	{
 		ValidateHeaps();
 
-		trace(__FUNCTION__ ": Running %s init functions\n", InitFunctionTypeToString(type));
+		trace("Running %s init functions\n", InitFunctionTypeToString(type));
 
 		OnInitFunctionStart(type);
 
@@ -103,7 +103,7 @@ namespace rage
 				for (auto entry = list->entries; entry; entry = entry->next)
 				{
 					OnInitFunctionStartOrder(type, entry->order, entry->functions.GetCount());
-					trace(__FUNCTION__ ": Running functions of order %i (%i total)\n", entry->order, entry->functions.GetCount());
+					trace("Running functions of order %i (%i total)\n", entry->order, entry->functions.GetCount());
 
 					int i = 0;
 
@@ -126,13 +126,12 @@ namespace rage
 
 							if (OnInitFunctionInvoking(type, i, func))
 							{
-								trace(__FUNCTION__ ": Invoking %s %s%s init (%i out of %i)\n", func.GetName(), InitFunctionTypeToString(type), async ? " (async)" : "", i + 1, entry->functions.GetCount());
-
+								trace("Invoking %s %s%s init (%i out of %i)\n", func.GetName(), InitFunctionTypeToString(type), async ? " (async)" : "", i + 1, entry->functions.GetCount());
 								assert(func.TryInvoke(type));
 							}
 							else
 							{
-								trace(__FUNCTION__ ": %s %s init canceled by event\n", func.GetName(), InitFunctionTypeToString(type));
+								trace("%s %s init canceled by event\n", func.GetName(), InitFunctionTypeToString(type));
 							}
 
 							// TODO: recalibrate RAGE timer
@@ -156,7 +155,7 @@ namespace rage
 
 		ValidateHeaps();
 
-		trace(__FUNCTION__ ": Done running %s init functions!\n", InitFunctionTypeToString(type));
+		trace("Done running %s init functions!\n", InitFunctionTypeToString(type));
 	}
 
 	static void RunEntries(gameSkeleton_updateBase* update)

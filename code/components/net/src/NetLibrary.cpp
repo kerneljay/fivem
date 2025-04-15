@@ -382,15 +382,12 @@ void NetLibrary::ProcessOOB(const NetAddress& from, const char* oob, size_t leng
 
 				StripColors(hostname, cleaned, 8192);
 
-#if defined(GTA_FIVE) || defined(GTA_NY)
-				SetWindowText(CoreGetGameWindow(), va(
-#ifdef GTA_FIVE
-					L"FiveM® by Cfx.re"
-#elif defined(GTA_NY)
-					L"LibertyM™ by Cfx.re"
-#endif
-					L" - %s", ToWide(cleaned)));
-#endif
+				#if defined(WINDOW_NAME)
+					SetWindowText(CoreGetGameWindow(), WINDOW_NAME);
+					// #undef WINDOW_NAME // Used in RenderHooks.cpp for the actual window name
+				#else
+					SetWindowText(CoreGetGameWindow(), L"CitizenFX");
+				#endif
 
 				auto richPresenceSetTemplate = [&](const auto& tpl)
 				{
