@@ -7,7 +7,7 @@ Shared CitizenFX framework code.
 * [**clrcore/**](./clrcore): CitizenFX.Core C# library.
 * [**clrref/**](./clrref): Reference generation for the CitizenFX.Core library.
 * [**common/**](./common): Shared source files included in all projects.
-* [**console/**](./console): `FiveM.com` console launcher.
+* [**console/**](./console): `JayM.com` console launcher.
 * [**diag/**](./diag): `CfxDiag` utility.
 * [**launcher/**](./launcher): Main client entry point/bootstrapper.
 * [**shared/**](./shared): Shared includes and source files.

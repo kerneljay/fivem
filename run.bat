@@ -12,6 +12,7 @@ if /i "%doBuild%"=="y" (
         pause
         exit /b %errorlevel%
     )
+    echo === Build Successful! ===
 ) else (
     echo Skipping build...
 )

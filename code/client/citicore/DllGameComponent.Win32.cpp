@@ -225,7 +225,7 @@ void DllGameComponent::ReadManifest()
 
 		if (m_path.find(L"scripthookv") != std::string::npos)
 		{
-			additionalInfo = " You likely overwrote scripthookv.dll from FiveM with a non-FiveM version of it. Delete content_index.xml to restore from this heinous act.";
+			additionalInfo = " It seems you've replaced JayM's ScriptHookV.dll with a non-JayM version. To undo this travesty, delete content_index.xml.";
 		}
 		FatalError("Component manifest mismatch in component %s.%s", converter.to_bytes(m_path).c_str(), additionalInfo);
 	}

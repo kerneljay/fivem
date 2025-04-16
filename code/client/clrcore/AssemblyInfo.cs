@@ -11,5 +11,5 @@ using System.Runtime.Versioning;
 #endif
 
 [assembly: AssemblyCompany("The CitizenFX Collective")]
-[assembly: AssemblyCopyright("Copyright CitizenFX and contributors, licensed under the FiveM Platform Agreement")]
+[assembly: AssemblyCopyright("Copyright CitizenFX and contributors, licensed under the JayM Platform Agreement")]
 
