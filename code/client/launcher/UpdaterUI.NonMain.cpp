@@ -39,6 +39,9 @@ void UI_DestroyTen()
 {
 }
 
+// This is the init of EnsureGamePath
+// Triggered in @Main.cpp
+// And defined in @GameSelect.cpp
 std::optional<int> EnsureGamePath()
 {
 	return {};

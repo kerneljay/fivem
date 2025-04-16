@@ -299,7 +299,7 @@ ves_icall_System_IO_MonoIO_DumpHandles (void);
 
 #define INVALID_SET_FILE_POINTER ((guint32) 0xFFFFFFFF)
 #define INVALID_FILE_SIZE        ((guint32) 0xFFFFFFFF)
-#define INVALID_FILE_ATTRIBUTES  ((guint32) 0xFFFFFFFF)
+#define INVALID_FILE_ATTRIBUTES  ((guint32) 0xFFFFFFFF) // used with GetPrivateProfileString
 
 #define FILE_TYPE_UNKNOWN 0x0000
 #define FILE_TYPE_DISK    0x0001

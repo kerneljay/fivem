@@ -1034,7 +1034,7 @@ static bool PerformUpdate(const std::vector<GameCacheEntry>& entries)
 	}
 
 	// UI_UpdateText(0, gettext(L"Updating game storage...").c_str());
-	UI_UpdateText(0, gettext(L"Hang tight - we're getting things ready for you...").c_str()); // Tweaked by Jay
+	UI_UpdateText(0, gettext(L"We're getting things ready for you...").c_str()); // Tweaked by Jay
 
 	bool retval = DL_RunLoop();
 

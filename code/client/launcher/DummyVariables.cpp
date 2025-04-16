@@ -36,10 +36,11 @@ DECLARE_TLS_VARS(7096);
 #pragma endregion
 #endif
 
+// This gets init'd in @Main.cpp
 void InitializeDummies()
 {
 #ifdef GTA_NY
-	tls1[6] = 0;
+	tls1[6] = 0; // what does this do?
 #endif
 }
 

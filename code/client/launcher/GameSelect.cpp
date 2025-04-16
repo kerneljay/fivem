@@ -68,6 +68,9 @@ static std::wstring GetFolderPath(const KNOWNFOLDERID& folderId)
 
 using json = nlohmann::json;
 
+
+// this is a fairly simple encryption method so decoding it just like so
+// why does rockstar obfuscate it all with zero-keys?
 static std::string GetMtlGamePath(std::string_view gameName)
 {
 	auto appdataRoot = GetFolderPath(FOLDERID_ProgramData);
@@ -130,24 +133,32 @@ static std::string GetMtlGamePath(std::string_view gameName)
 	return "";
 }
 
+// this gets triggered in @Main.cpp
 std::optional<int> EnsureGamePath()
 {
-#ifdef IS_LAUNCHER
+#ifdef IS_LAUNCHER // TODO: Is launcher??
 	return {};
 #endif
 
+	// TODO: What is std::wstring? wide string? 
+	// what is the purpose of doing this?
 	std::wstring fpath = MakeRelativeCitPath(L"CitizenFX.ini");
+	// TODO: learn what wchar_t is, completly forgot
 	const wchar_t* pathKey = L"IVPath";
 
+	// if its client 2 then set the path accordingly
 	if (wcsstr(GetCommandLine(), L"cl2"))
 	{
 		pathKey = L"PathCL2";
 	}
 
+	// what are file attributes
 	if (GetFileAttributes(fpath.c_str()) != INVALID_FILE_ATTRIBUTES)
 	{
 		wchar_t path[256];
 
+		// unused param? (3rd)
+		// this is a api function used primarily to read values from .ini files in this case CitizenFX.ini
 		GetPrivateProfileString(L"Game", pathKey, L"", path, _countof(path), fpath.c_str());
 
 		if (path[0] != L'\0')
@@ -157,27 +168,27 @@ std::optional<int> EnsureGamePath()
 
 			if (GetFileAttributes(gameExecutable.c_str()) != INVALID_FILE_ATTRIBUTES)
 			{
-				return {};
+				return {}; // is this correct? whats the reason for this - couldnt we just use FatalError
 			}
 		}
 	}
 
+	// i think this is just a helper function with a constructor and destructor
 	ScopedCoInitialize coInit(COINIT_APARTMENTTHREADED);
 
 	if (!coInit)
 	{
 		MessageBox(nullptr, va(L"CoInitializeEx failed. HRESULT = 0x%08x.", coInit.GetResult()), L"Error", MB_OK | MB_ICONERROR);
-
 		return static_cast<int>(coInit.GetResult());
 	}
 
+	// this is a good method. we dont need to manually Release() this way
 	WRL::ComPtr<IFileDialog> fileDialog;
 	HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_INPROC_SERVER, IID_IFileDialog, (void**)fileDialog.GetAddressOf());
 
 	if (FAILED(hr))
 	{
 		MessageBox(nullptr, va(L"CoCreateInstance(IFileDialog) failed. HRESULT = 0x%08x.", hr), L"Error", MB_OK | MB_ICONERROR);
-
 		return static_cast<int>(hr);
 	}
 
@@ -202,6 +213,7 @@ std::optional<int> EnsureGamePath()
 
 		// 5 is the amount of characters to strip off the end
 		const std::tuple<std::wstring, std::wstring, int> folderAttempts[] = {
+			// WOW6432Node is a special registry node used on 64-bit Windows to separate 32-bit application data from 64-bit application data.
 #if defined(GTA_FIVE)
 			{ L"InstallFolderSteam", L"SOFTWARE\\WOW6432Node\\Rockstar Games\\GTAV", 5 },
 			{ L"InstallFolderEpic", L"SOFTWARE\\Rockstar Games\\Grand Theft Auto V", 0 },
@@ -213,7 +225,7 @@ std::optional<int> EnsureGamePath()
 #endif
 		};
 
-		auto proposeDirectory = [&](const std::wstring& gameRoot)
+		auto verifyDirectory = [&](const std::wstring& gameRoot)
 		{
 			WRL::ComPtr<IShellItem> item;
 
@@ -226,6 +238,8 @@ std::optional<int> EnsureGamePath()
 
 				fileDialog->SetFolder(item.Get());
 
+
+				// This is horrible...
 #ifdef GTA_FIVE
 				if (checkFile(L"x64a.rpf") && checkFile(L"x64b.rpf") && checkFile(L"x64g.rpf") && checkFile(L"common.rpf") && checkFile(L"bink2w64.dll") && checkFile(L"x64\\audio\\audio_rel.rpf") && checkFile(L"GTA5.exe") && checkFile(L"update\\x64\\dlcpacks\\mpheist3\\dlc.rpf") &&
 					checkFile(L"update\\x64\\dlcpacks\\mptuner\\dlc.rpf") && checkFile(L"update\\x64\\dlcpacks\\mpsum2\\dlc.rpf"))
@@ -235,6 +249,7 @@ std::optional<int> EnsureGamePath()
 				if (checkFile(L"pc/audio/sfx/general.rpf"))
 #endif
 				{
+					// This writes to CitizenFX.ini right?
 					WritePrivateProfileString(L"Game", pathKey, gameRoot.c_str(), fpath.c_str());
 
 					return true;
@@ -245,28 +260,34 @@ std::optional<int> EnsureGamePath()
 		};
 
 		// try finding the MTL game path first
+		// MTL - Material Files (.mtl is used within the RAGE engine but is widely used in the game development)
 		auto mtlGamePath = GetMtlGamePath(
-#if defined(GTA_FIVE)
-		"gta5"
-#elif defined(IS_RDR3)
-		"rdr2"
-#elif defined(GTA_NY)
-		"gta4"
-#endif
+		#if defined(GTA_FIVE)
+				"gta5"
+		#elif defined(IS_RDR3)
+				"rdr2" // rdr2, rdr3??? which one fucking is it ? haha
+		#elif defined(GTA_NY)
+				"gta4"
+		#endif
 		);
 
+		// when will the mtl path ever be empty??
 		if (!mtlGamePath.empty())
 		{
-			if (proposeDirectory(ToWide(mtlGamePath)))
+			if (verifyDirectory(ToWide(mtlGamePath)))
 			{
-				return {};
+				return {}; // still dont understand why we just dont FatalError here
 			}
 		}
 
-		for (const auto& folder : folderAttempts)
+		// does not attempt multiple times 
+		// instead it just attempts each folder destination path within the tuple to try and get the game files path
+		for (const auto& folder : folderAttempts) 
 		{
-			if (RegGetValue(HKEY_LOCAL_MACHINE,
-				std::get<1>(folder).c_str(), std::get<0>(folder).c_str(),
+			// Not sure whats going off here
+			if (RegGetValue(HKEY_LOCAL_MACHINE, // hkey is registry stuff, we know this
+				std::get<1>(folder).c_str(), // subkey path?
+				std::get<0>(folder).c_str(), // value path?
 				RRF_RT_REG_SZ, nullptr, gameRootBuf, &gameRootLength) == ERROR_SUCCESS)
 			{
 				std::wstring gameRoot(gameRootBuf);
@@ -274,7 +295,7 @@ std::optional<int> EnsureGamePath()
 				// strip \GTAV if needed
 				gameRoot = gameRoot.substr(0, gameRoot.length() - std::get<int>(folder));
 
-				if (proposeDirectory(gameRoot))
+				if (verifyDirectory(gameRoot))
 				{
 					return {};
 				}

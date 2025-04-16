@@ -8,7 +8,7 @@ if /i "%doBuild%"=="y" (
 
     call .\fxd gen -game five
 
-    call .\fxd build
+    call .\fxd build 
 
     if %errorlevel% neq 0 (
         echo Build failed with error code %errorlevel%.
@@ -22,4 +22,5 @@ if /i "%doBuild%"=="y" (
 
 
 echo === Launching FiveM ===
+rem start cmd /k ""E:\JayM\fivem\code\bin\five\debug\FiveM.exe""
 start "" "E:\JayM/fivem\code\bin\five\debug\FiveM.exe"
