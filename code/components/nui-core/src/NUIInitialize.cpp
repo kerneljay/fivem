@@ -1587,6 +1587,13 @@ void Initialize(nui::GameInterface* gi)
 		nui::OnInitialize();
 	});
 	
+	// added by jay 16/04/25 13:33
+	static ConsoleCommand gamebuildCmd("gamebuild", []()
+    {
+        auto build = xbr::GetGameBuild();
+        console::Printf("gamebuild", "Current Game Build: %d\n", build);
+    });
+
 	static ConsoleCommand devtoolsCmd("nui_devtools", []()
 	{
 		auto rootWindow = Instance<NUIWindowManager>::Get()->GetRootWindow();
