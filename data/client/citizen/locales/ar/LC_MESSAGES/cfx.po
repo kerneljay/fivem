@@ -355,7 +355,7 @@ msgid "Verifying content..."
 msgstr "جاري التاكد من المحتوى..."
 
 #: client/launcher/GameCache.cpp:883
-msgid "Verifying game content..."
+msgid "Verifying game data..."
 msgstr "جاري التأكد من المحتوى..."
 
 #: client/launcher/Main.cpp:810

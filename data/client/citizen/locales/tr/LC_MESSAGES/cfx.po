@@ -355,7 +355,7 @@ msgid "Verifying content..."
 msgstr "İçerik denetleniyor..."
 
 #: client/launcher/GameCache.cpp:883
-msgid "Verifying game content..."
+msgid "Verifying game data..."
 msgstr "Oyun içeriği denetleniyor..."
 
 #: client/launcher/Main.cpp:810

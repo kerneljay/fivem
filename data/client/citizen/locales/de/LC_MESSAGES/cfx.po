@@ -370,7 +370,7 @@ msgid "Verifying content..."
 msgstr "Überprüfen des Inhalts..."
 
 #: client/launcher/GameCache.cpp:883
-msgid "Verifying game content..."
+msgid "Verifying game data..."
 msgstr "Überprüfen des Spielinhalts..."
 
 #: client/launcher/Main.cpp:810

@@ -353,7 +353,7 @@ msgid "Verifying content..."
 msgstr "파일 검증 중..."
 
 #: client/launcher/GameCache.cpp:883
-msgid "Verifying game content..."
+msgid "Verifying game data..."
 msgstr "게임 파일 검증 중..."
 
 #: client/launcher/Main.cpp:810

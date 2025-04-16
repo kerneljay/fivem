@@ -5,6 +5,9 @@ set /p doBuild=Do you want to build the project? (y/n):
 
 if /i "%doBuild%"=="y" (
     echo === Building Project ===
+
+    call .\fxd gen -game five
+
     call .\fxd build
 
     if %errorlevel% neq 0 (
@@ -17,5 +20,6 @@ if /i "%doBuild%"=="y" (
     echo Skipping build...
 )
 
+
 echo === Launching FiveM ===
-start "" "E:\fivem\code\bin\five\debug\FiveM.exe"
+start "" "E:\JayM/fivem\code\bin\five\debug\FiveM.exe"

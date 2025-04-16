@@ -352,7 +352,7 @@ msgid "Verifying content..."
 msgstr "Tartalom ellenőrzése..."
 
 #: client/launcher/GameCache.cpp:883
-msgid "Verifying game content..."
+msgid "Verifying game data..."
 msgstr "Játék tartalom ellenőrzése..."
 
 #: client/launcher/Main.cpp:810

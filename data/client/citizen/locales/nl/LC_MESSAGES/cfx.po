@@ -362,7 +362,7 @@ msgid "Verifying content..."
 msgstr "Data verifiëren..."
 
 #: client/launcher/GameCache.cpp:883
-msgid "Verifying game content..."
+msgid "Verifying game data..."
 msgstr "Speldata verifiëren..."
 
 #: client/launcher/Main.cpp:810

@@ -889,7 +889,7 @@ static bool PerformUpdate(const std::vector<GameCacheEntry>& entries)
 		
 		if (entry.IsDownloadable())
 		{
-			UI_UpdateText(0, gettext(L"Verifying game content...").c_str());
+			UI_UpdateText(0, gettext(L"Verifying game data...").c_str());
 
 			fileOutdated = CheckFileOutdatedWithUI(entry.GetLocalFileName().c_str(), hashes, &fileStart, fileTotal, &outHash);
 		}
@@ -1033,7 +1033,8 @@ static bool PerformUpdate(const std::vector<GameCacheEntry>& entries)
 		return true;
 	}
 
-	UI_UpdateText(0, gettext(L"Updating game storage...").c_str());
+	// UI_UpdateText(0, gettext(L"Updating game storage...").c_str());
+	UI_UpdateText(0, gettext(L"Hang tight - we're getting things ready for you...").c_str()); // Tweaked by Jay
 
 	bool retval = DL_RunLoop();
 

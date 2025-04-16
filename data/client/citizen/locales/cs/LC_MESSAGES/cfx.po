@@ -354,7 +354,7 @@ msgid "Verifying content..."
 msgstr "Ověřuji obsah..."
 
 #: client/launcher/GameCache.cpp:883
-msgid "Verifying game content..."
+msgid "Verifying game data..."
 msgstr "Ověřuji herní obsah..."
 
 #: client/launcher/Main.cpp:810

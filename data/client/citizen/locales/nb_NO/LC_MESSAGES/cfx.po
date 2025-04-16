@@ -352,7 +352,7 @@ msgid "Verifying content..."
 msgstr "Inspiserer innhold..."
 
 #: client/launcher/GameCache.cpp:883
-msgid "Verifying game content..."
+msgid "Verifying game data..."
 msgstr "Inspiserer spill-innhold..."
 
 #: client/launcher/Main.cpp:810
