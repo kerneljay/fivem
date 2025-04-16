@@ -380,7 +380,8 @@ void BackdropBrush::OnConnected()
 		auto effect = CompositionEffect(CLSID_D2D1Flood);
 
 #ifdef GTA_FIVE
-		effect.SetProperty("Color", winrt::Windows::UI::ColorHelper::FromArgb(255, 0x16, 0x19, 0x23));
+		// effect.SetProperty("Color", winrt::Windows::UI::ColorHelper::FromArgb(255, 0x16, 0x19, 0x23)); // og fivem version
+		effect.SetProperty("Color", winrt::Windows::UI::ColorHelper::FromArgb(255, 186, 2, 2));
 #elif defined(IS_RDR3)
 		effect.SetProperty("Color", winrt::Windows::UI::ColorHelper::FromArgb(255, 186, 2, 2));
 #elif defined(GTA_NY)
@@ -413,7 +414,8 @@ void BackdropBrush::OnConnected()
 		mat.M11 = 1.0f;
 		mat.M22 = 1.0f;
 		mat.M33 = 1.0f;
-		mat.M44 = 0.03f;
+		// mat.M44 = 0.03f; // og fivem version
+		mat.M44 = 0.15f;
 #elif defined(IS_RDR3) || defined(GTA_NY)
 		mat.M11 = 1.0f;
 		mat.M22 = 1.0f;

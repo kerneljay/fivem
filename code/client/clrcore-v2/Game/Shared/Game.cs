@@ -2,21 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
 #if MONO_V2
-#if IS_RDR3
-using CitizenFX.RedM.Native;
-namespace CitizenFX.RedM
-#elif IS_FXSERVER
-using CitizenFX.Server.Native;
-namespace CitizenFX.Server
-#else // IS_GTA
-using CitizenFX.FiveM.Native;
-namespace CitizenFX.FiveM
-#endif // END IS_RDR
+
+	#if IS_RDR3
+		using CitizenFX.RedM.Native;
+		namespace CitizenFX.RedM
+	#elif IS_FXSERVER
+		using CitizenFX.Server.Native;
+		namespace CitizenFX.Server
+	#else // IS_GTA
+		using CitizenFX.FiveM.Native;
+		namespace CitizenFX.FiveM
+	#endif // END IS_RDR
+
 #else // !MONO_V2
-using Natives = CitizenFX.Core.Native.API;
-namespace CitizenFX.Core
+	using Natives = CitizenFX.Core.Native.API;
+	namespace CitizenFX.Core
 #endif // END !MONO_V2
 {
 	public static partial class Game
